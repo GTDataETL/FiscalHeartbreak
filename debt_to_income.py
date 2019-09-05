@@ -57,28 +57,28 @@ merged_df = pd.merge(debt_transformed, county_transformed, on='area_fips', how='
 merged_df.head(100)
 
 
-# In[10]:
+# In[9]:
 
 
 cropped_df = merged_df.loc[(merged_df["year"]>=2009)]
 cropped_df.head(25)
 
 
-# In[11]:
+# In[10]:
 
 
 cleaned_df = cropped_df.dropna(how="any")
 cleaned_df.head(25)
 
 
-# In[12]:
+# In[11]:
 
 
 split_df = cleaned_df["county_name"].str.split(pat=", ", n=1, expand=True)
 split_df.head()
 
 
-# In[13]:
+# In[12]:
 
 
 cleaned_cols = ["year", "qtr", "area_fips", "DtoI_low", "DtoI_high"]
@@ -88,11 +88,25 @@ cleaned_merged = pd.merge(cleaned_transformed, split_df, left_index=True, right_
 cleaned_merged.head()
 
 
-# In[14]:
+# In[13]:
 
 
 final_df = cleaned_merged.rename(columns={0: "county_name", 1: "state"})
 final_df.head()
+
+
+# In[18]:
+
+
+firstqtr_df = final_df.loc[(final_df["qtr"]==1)]
+firstqtr_df.head()
+
+
+# In[19]:
+
+
+newfinal_df = firstqtr_df.drop(columns=['qtr'])
+newfinal_df.head()
 
 
 # In[ ]:
