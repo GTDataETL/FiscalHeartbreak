@@ -1,4 +1,5 @@
 ﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- Link to schema: https://app.quickdatabasediagrams.com/#/d/ixxC0b
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
 
@@ -19,14 +20,25 @@ CREATE TABLE "MaritalStatus" (
      )
 );
 
-CREATE TABLE "DebtToIncomeRatios" (
+CREATE TABLE "DebtToIncomeRatiosByYear" (
+    "Year" int   NOT NULL,
+    "CountyName" varchar(200)   NOT NULL,
+    "StateName" varchar(100)   NOT NULL,
+    "DtoI_low" float   NOT NULL,
+    "DtoI_high" float   NOT NULL,
+    CONSTRAINT "pk_DebtToIncomeRatiosByYear" PRIMARY KEY (
+        "Year","CountyName","StateName"
+     )
+);
+
+CREATE TABLE "DebtToIncomeRatiosByQtr" (
     "Year" int   NOT NULL,
     "Quarter" int   NOT NULL,
     "CountyName" varchar(200)   NOT NULL,
     "StateName" varchar(100)   NOT NULL,
     "DtoI_low" float   NOT NULL,
     "DtoI_high" float   NOT NULL,
-    CONSTRAINT "pk_DebtToIncomeRatios" PRIMARY KEY (
+    CONSTRAINT "pk_DebtToIncomeRatiosByQtr" PRIMARY KEY (
         "Year","Quarter","CountyName","StateName"
      )
 );
@@ -54,5 +66,5 @@ CREATE TABLE "Income_time_permitting" (
 );
 
 ALTER TABLE "MaritalStatus" ADD CONSTRAINT "fk_MaritalStatus_Year_CountyName_StateName" FOREIGN KEY("Year", "CountyName", "StateName")
-REFERENCES "DebtToIncomeRatios" ("Year", "CountyName", "StateName");
+REFERENCES "DebtToIncomeRatiosByYear" ("Year", "CountyName", "StateName");
 

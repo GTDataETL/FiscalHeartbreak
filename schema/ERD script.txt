@@ -1,9 +1,9 @@
-﻿MaritalStatus
+MaritalStatus
 ### Source: Census ACS table S1201
 -
-Year int PK FK 0-0 DebtToIncomeRatios.Year
-CountyName varchar(200) PK FK 0-0 DebtToIncomeRatios.CountyName
-StateName varchar(100) PK FK 0-0 DebtToIncomeRatios.StateName
+Year int PK FK 0-0 DebtToIncomeRatiosByYear.Year
+CountyName varchar(200) PK FK 0-0 DebtToIncomeRatiosByYear.CountyName
+StateName varchar(100) PK FK 0-0 DebtToIncomeRatiosByYear.StateName
 NowMarriedPct float
 NowMarriedError float
 DivorcedPct float
@@ -14,7 +14,16 @@ NeverMarriedPct float
 NeverMarriedError float
 
 
-DebtToIncomeRatios
+DebtToIncomeRatiosByYear
+### Source: Federal Reserve EFA: Household Debt
+-
+Year PK int
+CountyName PK varchar(200)
+StateName PK varchar(100)
+DtoI_low float
+DtoI_high float
+
+DebtToIncomeRatiosByQtr
 ### Source: Federal Reserve EFA: Household Debt
 -
 Year PK int
@@ -23,7 +32,6 @@ CountyName PK varchar(200)
 StateName PK varchar(100)
 DtoI_low float
 DtoI_high float
-
 
 MortgageCosts_time_permitting
 ### Source: Census ACS table B25087
