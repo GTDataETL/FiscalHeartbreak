@@ -1,4 +1,4 @@
-﻿-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
+-- Exported from QuickDBD: https://www.quickdatabasediagrams.com/
 -- Link to schema: https://app.quickdatabasediagrams.com/#/d/ixxC0b
 -- NOTE! If you have used non-SQL datatypes in your design, you will have to change these here.
 
@@ -65,6 +65,10 @@ CREATE TABLE "Income_time_permitting" (
      )
 );
 
-ALTER TABLE "MaritalStatus" ADD CONSTRAINT "fk_MaritalStatus_Year_CountyName_StateName" FOREIGN KEY("Year", "CountyName", "StateName")
-REFERENCES "DebtToIncomeRatiosByYear" ("Year", "CountyName", "StateName");
+-- REMOVING the FK relationship as the data is denormalized and there is no guarantee
+-- that data exists for every county equally in both fact tables. The two tables should
+-- be inner joined during analysis to properly evaluate marriage stats compared to debt
+-- stats in counties where both stats exist
+--ALTER TABLE "MaritalStatus" ADD CONSTRAINT "fk_MaritalStatus_Year_CountyName_StateName" --FOREIGN KEY("Year", "CountyName", "StateName")
+--REFERENCES "DebtToIncomeRatiosByYear" ("Year", "CountyName", "StateName");
 
